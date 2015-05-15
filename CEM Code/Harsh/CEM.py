@@ -8,7 +8,7 @@ def cem(f):
     j=0
     window=[]
     auto=[]
-    while(j<5000):
+    while(j<50000):
         window.append(0)
         j=j+1
     start=0
@@ -21,8 +21,8 @@ def cem(f):
         size=len(l)
         i=0
         while(i<size):
-            if(j<5000):
-                x=((j1+start)%5000)
+            if(j<50000):
+                x=((j1+start)%50000)
                 window[x]=l[i]
                 j=j+1
                 j1 = j1 + 1
@@ -30,7 +30,7 @@ def cem(f):
                 auto.append(auto_en(window,start))
                 j=shift
                 j1 = 0
-                start=(start+shift)%5000
+                start=(start+shift)%50000
             i=i+1
     return auto
 
@@ -39,11 +39,11 @@ def auto_en(window,start):
     j=0
     ent=[]
 #    print window
-    while(j<5000):
-        subwin=[0 for wee in range(200)]
+    while(j<50000):
+        subwin=[0 for wee in range(199)]
         i=0
-        while(i<200 and j<5000):
-            subwin[i]=window[(j+start)%5000]
+        while(i<199 and j<50000):
+            subwin[i]=window[(j+start)%50000]
             i=i+1
             j=j+1
 #        print subwin
@@ -126,5 +126,4 @@ def log(x):
     else:
         return math.log(x)
 
-
-print cem("/Users/Shantanu/Desktop/NC_000964.fna")
+print cem("/Users/Shantanu/Desktop/NC_023028.fna")
