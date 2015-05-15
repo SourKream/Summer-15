@@ -12,9 +12,9 @@ class Cem
 	std::string currWindow;
 	std::vector<float> plotValues;
 	
-	void AutoCorrelate();
-	void Entorpy();
-	void CorrelatedEntropy();
+	float AutoCorrelate (float [], int);
+	float Entorpy (int);
+	float CorrelatedEntropy();
 
 public:
 
