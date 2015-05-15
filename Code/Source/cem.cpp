@@ -2,22 +2,25 @@
 #define CEM_CPP
 #include "cem.hpp"
 
-Cem::cem(int winSize,int subwinSize)
-{
+#define SHIFT_FRACTION 0.2 //Defining by what fraction is the window sliding. Taken to be 1/5th by default.
+
+
+Cem::Cem(int winSize,int subwinSize){
 	windowSize = winSize;
 	subWindowSize = subwinSize;
 	numSubWindows = windowSize / subWindowSize;
 	if (windowSize % subWindowSize)
 		numSubWindows++;
+	shiftFraction = SHIFT_FRACTION;
 }
 
-Cem::cem()
-{
 
+Cem::Cem(){
+	shiftFraction = SHIFT_FRACTION;
 }
 
-void Cem::setWinSubWin(int winSize,int subWinSize)
-{
+
+void Cem::setWinSubWin(int winSize,int subWinSize){
 	windowSize = winSize;
 	subWindowSize = subWinSize;
 	numSubWindows = windowSize / subWindowSize;
@@ -25,45 +28,29 @@ void Cem::setWinSubWin(int winSize,int subWinSize)
 		numSubWindows++;
 }
 
-float Cem::Entorpy (int subWindowStartIndex)
-{
-	int subwindowLength = min(subWindowSize,((int)currWindow.length() - subWindowStartIndex));
+
+float Cem::Entropy (int subWindowStartIndex){
+	int subwindowLength = std::min(subWindowSize,((int)currWindow.length() - subWindowStartIndex));
 	int freqA = 0, freqT = 0, freqC = 0, freqG = 0;
-	
-	for(int i=0; i<subwindowLength; i++)		// count number of times each base is present in the subwindow
-		switch (subwindow[i + subWindowStartIndex])
-	{
-		case 'A':
-			freqA++;
-			break;
-		case 'T':
-			freqT++;
-			break;
-		case 'C':
-			freqC++;
-			break;
-		case 'G':
-			freqG++;
-			break;
-		default:
-			break;
+	for(int i=0; i<subwindowLength; i++){		// count number of times each base is present in the subwindow
+		switch (currWindow[i + subWindowStartIndex]){
+			case 'A': freqA++;
+					 break;
+			case 'T':freqT++;
+					 break;
+			case 'C':freqC++;
+					 break;
+			case 'G':freqG++;
+					 break;
+			default: break;
+		}
 	}
 	
-	float probA = ((float)freqA/subwindowLength);	// probability of occurence of each base
-	float probT = ((float)freqT/subwindowLength);
-	float probC = ((float)freqC/subwindowLength);
-	float probG = ((float)freqG/subwindowLength);
-	
-	float entropy = 0;
-	
-	if (!probA)						// in case any prob is 0, p*log(p) should go to 0, so p is set to 1 so that log(p) is 0
-		probA = 1;
-	if (!probT)
-		probT = 1;
-	if (!probC)
-		probC = 1;
-	if (!probG)
-		probG = 1;
+	float probA = (((float)freqA/subwindowLength) == 0.0) ? 1 : ((float)freqA/subwindowLength);	// probability of occurence of each base if prob==0 then prob=1, so that log(prob) is defined.
+	float probT = (((float)freqT/subwindowLength) == 0.0) ? 1 : ((float)freqT/subwindowLength);
+	float probC = (((float)freqG/subwindowLength) == 0.0) ? 1 : ((float)freqG/subwindowLength);
+	float probG = (((float)freqC/subwindowLength) == 0.0) ? 1 : ((float)freqC/subwindowLength);
+	float entropy = 0; 
 	
 	entropy += probA * log2 (probA);	// As per the entropy formula
 	entropy += probT * log2 (probT);
@@ -74,17 +61,16 @@ float Cem::Entorpy (int subWindowStartIndex)
 	return entropy;
 }
 
-float Cem::CorrelatedEntropy()
-{
+
+float Cem::CorrelatedEntropy(){
 	long windowLength = currWindow.length();				// The last window maybe smaller than the windowSize chosen
 	float *entropySequence = new float[numSubWindows];			// Array to store the sequence of entropy values of each subwindow
 
 	for(int i=0;i<numSubWindows;i++)
-		entropySequence[i] = 0;
+		entropySequence[i] = 0.0;
 	
 	int i;
-	for (i=0; i*subWindowSize<windowLength; i++)
-	{
+	for (i=0; i*subWindowSize<windowLength; i++){
 		entropySequence[i] = Entropy(i*subWindowSize);						// and its entropy value stored in array
 	}
 	
@@ -93,37 +79,70 @@ float Cem::CorrelatedEntropy()
 													// window is returned
 }
 
-float Correlate (int k, float seq[], int N, float &mean, float &variance) // Subfunction of autocorrelation function
-{
+
+float Correlate (int k, float seq[], int N,const float &mean,const float &variance){ // Subfunction of autocorrelation function
 	float Ck = 0;
 	for (int i=0; i<N-k; i++)
 		Ck += (seq[i] - mean)*(seq[i+k] - mean);
 	
 	Ck /= (N-k);
-	Ck /= (variance);
+	if(variance!=0)
+		Ck /= (variance);
 	return Ck;
 }
 
-float Cem::AutoCorrelate (float seq[], int N) // Standard Autocorrelation function
-{
+
+float Cem::AutoCorrelate (float seq[], int N){ // Standard Autocorrelation function
 	float seqMean =0, seqVariance =0;
 	
-	for (int i=0; i<N; i++)		// To find the mean of the sequence
+	for (int i=0; i<N; i++){		// To find the mean and sigma(xi*xi)  of the sequence
 		seqMean += seq[i];
+		seqVariance += seq[i]*seq[i]; 
+	}
 	seqMean /= N;
 	
-	for (int i=0; i<N; i++)											// To find the variance of the sequence
-		seqVariance += (seq[i] - seqMean)*(seq[i] - seqMean);
-	seqVariance /= N;
+	seqVariance  = (seqVariance / N) - seqMean; // Variance  = (1/N*sigma(xi*xi)) - (x bar);
+
 	
-	float C = 0;
+	float CorrelatedValue = 0;
 	
 	for (int i=1; i<N; i++)
-		C += fabs(Correlate(i, seq, N, seqMean, seqVariance));
+		CorrelatedValue += fabs(Correlate(i, seq, N, seqMean, seqVariance));
 	
-	C /= (N-1);
+	CorrelatedValue /= (N-1);
 	
-	return C;
+	return CorrelatedValue;
+}
+
+void Cem::operate(const std::string& src){
+	std::fstream f;
+	f.open(src,std::ios::in);
+	if(!f){
+		std::cout<<"Error while opening file \n";
+		return;
+	}
+	getline(f,currWindow); //Skipping the first line
+	//std::cout<<currWindow<<"\n";
+	while(!f.eof()){
+		currWindow = "";
+		for(int i=0;i<windowSize && !f.eof();++i){
+			char mTmp = f.get();
+			if((mTmp>='A' && mTmp<='Z') || (mTmp>='a' && mTmp<='z'))
+				currWindow+=mTmp;
+			else 
+				i--;
+		}
+		plotValues.push_back(CorrelatedEntropy());
+		if(!f.eof()){
+			f.seekg(-shiftFraction* windowSize * sizeof(char),std::ios::cur); // For overlapping windows.
+		}
+	}
+}
+
+void Cem::write(const std::string &dest){
+	for(int i=0;i<plotValues.size();++i){
+		std::cout<<i+1<<" : "<<plotValues[i]<<"\n";
+	}
 }
 
 #endif

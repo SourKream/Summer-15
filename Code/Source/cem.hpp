@@ -1,7 +1,10 @@
 #ifndef CEM_HPP
 #define CEM_HPP
 #include <vector>
-
+#include <string>
+#include <cmath>
+#include <fstream>
+#include <iostream>
 class Cem
 {
 	int windowSize;
@@ -9,13 +12,13 @@ class Cem
 	int numSubWindows;
 	float shiftFraction;
 	
-	std::string currWindow;
+	
 	std::vector<float> plotValues;
 	
-	float AutoCorrelate (float [], int);
-	float Entorpy (int);
-	float CorrelatedEntropy();
-
+	 float AutoCorrelate (float [], int);
+	 float Entropy (int);
+	 float CorrelatedEntropy();
+	std::string currWindow;
 public:
 
 	Cem(int ,int);
@@ -23,6 +26,10 @@ public:
 	void setWinSubWin(int,int);
 	void operate(const std::string &);
 	void write(const std::string &);
+	// float AutoCorrelate (float [], int);
+	// float Entropy (int);
+	// float CorrelatedEntropy();
+	
 };
 
 #endif 
