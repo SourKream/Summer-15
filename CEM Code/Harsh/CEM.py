@@ -8,29 +8,34 @@ def cem(f):
     j=0
     window=[]
     auto=[]
+    #Initializing Window
     while(j<50000):
         window.append(0)
         j=j+1
+    #End of initialization
+    #Variable Declaration
     start=0
     j=0
     j1 = 0
     shift = 0
+    #End of Variable Declaration
     for line in file:
         s=line
         l=list(s)
-        size=len(l)
+        size=len(l) # #(characters in line)
         i=0
         while(i<size):
             if(j<50000):
                 x=((j1+start)%50000)
                 window[x]=l[i]
+                print window[x] + " " + l[i] + "\n"
                 j=j+1
                 j1 = j1 + 1
-            else:     
+            '''else:     
                 auto.append(auto_en(window,start))
                 j=shift
                 j1 = 0
-                start=(start+shift)%50000
+                start=(start+shift)%50000'''
             i=i+1
     return auto
 
@@ -126,4 +131,4 @@ def log(x):
     else:
         return math.log(x)
 
-print cem("/Users/Shantanu/Desktop/NC_023028.fna")
+print cem("NC_023028.fna")
