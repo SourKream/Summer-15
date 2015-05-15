@@ -1,25 +1,28 @@
 #ifndef CEM_HPP
 #define CEM_HPP
 #include <vector>
-class Cem{
+
+class Cem
+{
 	int windowSize;
 	int subWindowSize;
 	int numSubWindows;
-	float shiftValue;
+	float shiftFraction;
 	
-	std::string currString;
+	std::string currWindow;
 	std::vector<float> plotValues;
 	
 	void AutoCorrelate();
 	void Entorpy();
 	void CorrelatedEntropy();
+
 public:
+
 	Cem(int ,int);
 	Cem();
 	void setWinSubWin(int,int);
-	void read(const std::string &);
+	void operate(const std::string &);
 	void write(const std::string &);
-
 };
 
 #endif 
