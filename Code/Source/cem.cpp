@@ -117,6 +117,7 @@ float Cem::AutoCorrelate (float seq[], int N){ // Standard Autocorrelation funct
 void Cem::operate(const std::string& src){
 	std::fstream f;
 	f.open(src,std::ios::in);
+	float shiftMargin = 1.0 - shiftFraction;
 	if(!f){
 		std::cout<<"Error while opening file \n";
 		return;
@@ -134,7 +135,7 @@ void Cem::operate(const std::string& src){
 		}
 		plotValues.push_back(CorrelatedEntropy());
 		if(!f.eof()){
-			f.seekg(-shiftFraction* windowSize * sizeof(char),std::ios::cur); // For overlapping windows.
+			f.seekg(-shiftMargin * windowSize * sizeof(char),std::ios::cur); // For overlapping windows.
 		}
 	}
 }

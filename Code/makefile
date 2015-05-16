@@ -3,6 +3,9 @@ OBJ=Obj/
 DATA=Data/
 EXE=cem.out
 COMPILER=g++ -std=c++11
+FNAME="Data/Genome.txt"
+WINSIZE=50000
+SUBWINSIZE=125
 all:
 	make $(EXE)
 
@@ -22,4 +25,4 @@ clean:
 	rm $(OBJ)*
 
 execute:$(EXE)
-	./$(EXE)
+	./$(EXE) $(FNAME) $(WINSIZE) $(SUBWINSIZE)
