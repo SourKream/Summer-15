@@ -138,6 +138,7 @@ void Cem::operate(const std::string& src){
 			f.seekg(-shiftMargin * windowSize * sizeof(char),std::ios::cur); // For overlapping windows.
 		}
 	}
+	f.close();
 }
 
 void Cem::write(const std::string &dest){
