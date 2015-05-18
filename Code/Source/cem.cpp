@@ -2,7 +2,7 @@
 #define CEM_CPP
 #include "cem.hpp"
 
-#define SHIFT_FRACTION 0.2 //Defining by what fraction is the window sliding. Taken to be 1/5th by default.
+#define SHIFT_FRACTION 1.0 //Defining by what fraction is the window sliding. Taken to be 1/5th by default.
 
 
 Cem::Cem(int winSize,int subwinSize){
@@ -94,16 +94,18 @@ float Correlate (int k, float seq[], int N,const float &mean,const float &varian
 
 float Cem::AutoCorrelate (float seq[], int N){ // Standard Autocorrelation function
 	float seqMean =0, seqVariance =0;
-	
 	for (int i=0; i<N; i++){		// To find the mean and sigma(xi*xi)  of the sequence
 		seqMean += seq[i];
-		seqVariance += seq[i]*seq[i]; 
+		seqVariance += seq[i]*seq[i];
+		
 	}
 	seqMean /= N;
 	
-	seqVariance  = (seqVariance / N) - seqMean; // Variance  = (1/N*sigma(xi*xi)) - (x bar);
-
-	
+	seqVariance  = (seqVariance / N) - seqMean*seqMean; // Variance  = (1/N*sigma(xi*xi)) - (x bar)^2;
+	/*for(int i=0;i<N;i++){
+		seqVariance+=(seq[i] - seqMean)*(seq[i] - seqMean);
+	}*/
+	//seqVariance /= N;
 	float CorrelatedValue = 0;
 	
 	for (int i=1; i<N; i++)
@@ -142,8 +144,13 @@ void Cem::operate(const std::string& src){
 }
 
 void Cem::write(const std::string &dest){
-	for(int i=0;i<plotValues.size();++i){
+	/*for(int i=0;i<plotValues.size();++i){
 		std::cout<<i+1<<" : "<<plotValues[i]<<"\n";
+	}*/
+	std::fstream filOut;
+	filOut.open("Data/GenomeData.txt",std::ios::out);
+	for(int i=0;i<plotValues.size();i++){
+		filOut<<i+1<<" "<<plotValues[i]<<"\n";
 	}
 }
 
