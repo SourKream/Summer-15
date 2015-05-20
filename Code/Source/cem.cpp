@@ -4,6 +4,9 @@
 
 #define SHIFT_FRACTION 1.0 //Defining by what fraction is the window sliding. Taken to be 1/5th by default.
 
+std::string Cem::getFileName(){
+	return fileName;
+}
 
 Cem::Cem(int winSize,int subwinSize){
 	windowSize = winSize;
@@ -124,6 +127,11 @@ void Cem::operate(const std::string& src){
 		std::cout<<"Error while opening file \n";
 		return;
 	}
+
+	fileName = src.substr(src.find_last_of('/')+1);
+	fileName = fileName.substr(0,fileName.find_last_of('.'));
+	fileName += "_" + std::to_string(windowSize) + "_" + std::to_string(subWindowSize);
+
 	getline(f,currWindow); //Skipping the first line
 	//std::cout<<currWindow<<"\n";
 	while(!f.eof()){

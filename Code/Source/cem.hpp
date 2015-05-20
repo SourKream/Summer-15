@@ -11,6 +11,7 @@ class Cem
 	int subWindowSize;
 	int numSubWindows;
 	float shiftFraction;
+	std::string fileName;
 	
 	
 	std::vector<float> plotValues;
@@ -26,6 +27,7 @@ public:
 	void setWinSubWin(int,int);
 	void operate(const std::string &);
 	void write(const std::string &);
+	std::string getFileName();
 	// float AutoCorrelate (float [], int);
 	// float Entropy (int);
 	// float CorrelatedEntropy();

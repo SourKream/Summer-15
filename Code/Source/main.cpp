@@ -28,13 +28,12 @@ int main(int argc,char* argv[]){
 	// Plotting the Data in GenomeData.txt and saving it in Plots/ after renaming
 	system("gnuplot Source/plot.plt");
 
-	char command[100] = "mv Plots/Plot.svg Plots/Plot_";
-	strcat(command, argv[2]);
-	strcat(command, "_");
-	strcat(command, argv[3]);
-	strcat(command, ".svg");
-	system(command);
-	cout << "Output Generated: \"Plot_" << argv[2] << "_" << argv[3] << ".svg\"\n\n";
+	string command = "mv Plots/Plot.svg Plots/" + a.getFileName() + ".svg";
+	system(command.c_str());
+	command = "mv Data/GenomeData.txt Data/" + a.getFileName() + ".txt";
+	system(command.c_str());
+
+	cout << "Output Generated: " << a.getFileName() << ".svg\"\n\n";
 
 return 0;
 }
