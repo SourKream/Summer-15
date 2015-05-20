@@ -26,7 +26,7 @@ int main(int argc,char* argv[]){
 
 
 	// Plotting the Data in GenomeData.txt and saving it in Plots/ after renaming
-	system("gnuplot plot.plt");
+	system("gnuplot Source/plot.plt");
 
 	char command[100] = "mv Plots/Plot.svg Plots/Plot_";
 	strcat(command, argv[2]);
