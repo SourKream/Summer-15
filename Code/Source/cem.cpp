@@ -2,7 +2,7 @@
 #define CEM_CPP
 #include "cem.hpp"
 
-#define SHIFT_FRACTION 1.0 //Defining by what fraction is the window sliding. Taken to be 1/5th by default.
+#define SHIFT_FRACTION 1 //Defining by what fraction is the window sliding. Taken to be 1/5th by default.
 
 std::string Cem::getFileName(){
 	return fileName;
