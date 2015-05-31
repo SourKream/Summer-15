@@ -134,20 +134,31 @@ void Cem::operate(const std::string& src){
 
 	getline(f,currWindow); //Skipping the first line
 	//std::cout<<currWindow<<"\n";
+	int count=0;
+	std::string firstWindow="";
 	while(!f.eof()){
 		currWindow = "";
-		for(int i=0;i<windowSize && !f.eof();++i){
+		int i;
+		for( i=0;i<windowSize && !f.eof();++i){
 			char mTmp = f.get();
 			if((mTmp>='A' && mTmp<='Z') || (mTmp>='a' && mTmp<='z'))
 				currWindow+=mTmp;
 			else 
 				i--;
 		}
+		if(count==0){
+			count++;
+			firstWindow=currWindow;
+		}
+		if(i<windowSize){
+			currWindow+=firstWindow.substr(0,windowSize-i);
+		}
 		plotValues.push_back(CorrelatedEntropy());
 		if(!f.eof()){
 			f.seekg(-shiftMargin * windowSize * sizeof(char),std::ios::cur); // For overlapping windows.
 		}
 	}
+	
 	f.close();
 }
 
