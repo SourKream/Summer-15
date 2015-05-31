@@ -76,17 +76,17 @@ float Cem::CorrelatedEntropy(){
 	for (i=0; i*subWindowSize<windowLength; i++){
 		entropySequence[i] = Entropy(i*subWindowSize);						// and its entropy value stored in array
 	}
-	
-	return AutoCorrelate(entropySequence, i);		// Autocorrealtion is applied on the array
+	return CrossCorrelate(entropySequence,i);
+	//return AutoCorrelate(entropySequence, i);		// Autocorrealtion is applied on the array
 													// and the resulting correlated entropy measure of the
 													// window is returned
 }
 
 
-float Correlate (int k, float seq[], int N,const float &mean,const float &variance){ // Subfunction of autocorrelation function
+float Correlate (int k, float seq[], int N,const float &meanx,const float meany,const float &variance){ // Subfunction of autocorrelation function
 	float Ck = 0;
 	for (int i=0; i<N-k; i++)
-		Ck += (seq[i] - mean)*(seq[i+k] - mean);
+		Ck += (seq[i] - meanx)*(seq[i+k] - meany);
 	
 	Ck /= (N-k);
 	if(variance!=0)
@@ -112,13 +112,45 @@ float Cem::AutoCorrelate (float seq[], int N){ // Standard Autocorrelation funct
 	float CorrelatedValue = 0;
 	
 	for (int i=1; i<N; i++)
-		CorrelatedValue += fabs(Correlate(i, seq, N, seqMean, seqVariance));
+		CorrelatedValue += fabs(Correlate(i, seq, N, seqMean, seqMean, seqVariance));
 	
 	CorrelatedValue /= (N-1);
 	
 	return CorrelatedValue;
 }
 
+float Cem::CrossCorrelate(float seq[],int N){ // Cross Correlation function, taking a_0,a_1....a_N-k-1 and a_k,a_k+1...a_N-1 as two different sequences
+	float CorrelatedValue = 0;
+	
+	for (int i=1; i<N; i++){
+		float seqVariance = 0.0;
+		float meanx=0,meany=0,stdx=0,stdy=0;
+		for(int j=0;j<N-i;j++){
+			meanx+=seq[j];
+		}
+		for(int j=i;j<N;j++){
+			meany+=seq[j];
+		}
+		meanx = meanx / (N-i);
+		meany = meany / (N-i);
+		for(int j=0;j<N-i;j++){
+			stdx += (seq[j] - meanx)*(seq[j] - meanx);
+		}
+		for(int j=i;j<N;j++){
+			stdy += (seq[j] - meany)*(seq[j] - meany);
+		}
+		stdx /= (N-i);
+		stdy /= (N-i);
+		//std::cout<<stdx<<" "<<stdy<<" "<<meanx<<" "<<meany<<"\n";
+		stdx = sqrt(stdx);
+		stdy = sqrt(stdy);
+		seqVariance = stdx*stdy;
+		CorrelatedValue += fabs(Correlate(i, seq, N, meanx, meany, seqVariance));
+	}
+	CorrelatedValue /= (N-1);
+	
+	return CorrelatedValue;
+}
 void Cem::operate(const std::string& src){
 	std::fstream f;
 	f.open(src,std::ios::in);
