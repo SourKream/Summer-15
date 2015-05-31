@@ -158,7 +158,7 @@ void Cem::write(const std::string &dest){
 	std::fstream filOut;
 	filOut.open("Data/GenomeData.txt",std::ios::out);
 	for(int i=0;i<plotValues.size();i++){
-		filOut<<i+1<<" "<<plotValues[i]<<"\n";
+		filOut<<plotValues[i]<<"\n";
 	}
 }
 
