@@ -148,9 +148,11 @@ void Cem::operate(const std::string& src){
 		}
 		if(count==0){
 			count++;
+			//Storing the first window for wrap around, if required
 			firstWindow=currWindow;
 		}
 		if(i<windowSize){
+			//Updating the last window with wrap around genome data...
 			currWindow+=firstWindow.substr(0,windowSize-i);
 		}
 		plotValues.push_back(CorrelatedEntropy());
