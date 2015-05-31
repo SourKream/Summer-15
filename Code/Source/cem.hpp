@@ -17,6 +17,7 @@ class Cem
 	std::vector<float> plotValues;
 	
 	 float AutoCorrelate (float [], int);
+	 float CrossCorrelate(float [],int);
 	 float Entropy (int);
 	 float CorrelatedEntropy();
 	std::string currWindow;
