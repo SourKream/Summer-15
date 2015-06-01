@@ -12,14 +12,14 @@ class Cem
 	int numSubWindows;
 	float shiftFraction;
 	std::string fileName;
-	
-	
+	bool debug;
 	std::vector<float> plotValues;
 	
 	 float AutoCorrelate (float [], int);
 	 float CrossCorrelate(float [],int);
 	 float Entropy (int);
 	 float CorrelatedEntropy();
+	 float Correlate (int k, float seq[], int N,const float &meanx,const float meany,const float &variance);
 	std::string currWindow;
 public:
 
@@ -29,10 +29,7 @@ public:
 	void operate(const std::string &);
 	void write(const std::string &);
 	std::string getFileName();
-	// float AutoCorrelate (float [], int);
-	// float Entropy (int);
-	// float CorrelatedEntropy();
-	
+	void setDebugFlag();
 };
 
 #endif 

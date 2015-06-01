@@ -5,17 +5,19 @@
 using namespace std;
 
 int main(int argc,char* argv[]){
-	if(argc!=4){
-		cout << "\nSyntax: ./CEM.o <File_Name> <Window_Size> <SubWindow_Size>\n\n";
+	if(argc!=5){
+		cout << "\nSyntax: ./CEM.o <File_Name> <Window_Size> <SubWindow_Size> <Debug_State>\n\n";
 		return 1;
 	}
-	int winSize=atoi(argv[2]),subWinSize=atoi(argv[3]);
+	int winSize=atoi(argv[2]),subWinSize=atoi(argv[3]),debugValue=atoi(argv[4]);
 	if(winSize<subWinSize){
 		cout<<"\n Window size is less than subwindow size. Error \n\n";
 		return 1;
 	}
 	Cem a(winSize,subWinSize);
-
+	if(debugValue){
+		a.setDebugFlag();
+	}
 	// Cem a(50000,125);
 	// string inp;
 	// cout<<"Enter file name: ";
@@ -24,7 +26,7 @@ int main(int argc,char* argv[]){
 	a.operate(argv[1]);
 	a.write("");
 
-
+	
 	// Plotting the Data in GenomeData.txt and saving it in Plots/ after renaming
 	system("gnuplot Source/plot.plt");
 
