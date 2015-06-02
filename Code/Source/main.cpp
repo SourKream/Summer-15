@@ -15,6 +15,7 @@ int main(int argc,char* argv[]){
 		cout<<"\n Window size is less than subwindow size. Error \n\n";
 		return 1;
 	}
+
 	Cem a(winSize,subWinSize);
 	if(debugValue){
 		a.setDebugFlag();
@@ -29,14 +30,15 @@ int main(int argc,char* argv[]){
 	
 	// Plotting the Data in GenomeData.txt and saving it in Plots/ after renaming
 	system("gnuplot Source/plot.plt");
-	string folderExtension = ( a.getCorrelatedModeFlag() )? "CrossCorrelate":"AutoCorrelate";
-	
-	string command = "mv Plots/Plot.svg Plots/" + folderExtension + a.getFileName() + ".svg";
+	string folderExtension = (a.getCorrelatedModeFlag())? "CrossCorrelate/":"AutoCorrelate/";
+	string fileExtension = (a.getCorrelatedModeFlag())? "CC_":"AC_"; 
+
+	string command = "mv Plots/Plot.svg Plots/" + folderExtension + fileExtension + a.getFileName() + ".svg";
 	system(command.c_str());
-	command = "mv Data/GenomeData.txt Data/" + folderExtension + a.getFileName() + ".txt";
+	command = "mv Data/GenomeData.txt Data/" + folderExtension + fileExtension + a.getFileName() + ".txt";
 	system(command.c_str());
 
-	cout << "Output Generated: " << a.getFileName() << ".svg\"\n\n";
+	cout << "Output Generated: " << folderExtension << fileExtension << a.getFileName() << ".svg\"\n\n";
 
 return 0;
 }
