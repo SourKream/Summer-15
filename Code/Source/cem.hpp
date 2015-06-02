@@ -32,6 +32,7 @@ public:
 	std::string getFileName();
 	void setDebugFlag();
 	void setCorrelatedModeFlag();
+	bool getCorrelatedModeFlag();
 };
 
 #endif 

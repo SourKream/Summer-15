@@ -256,4 +256,8 @@ void Cem::setDebugFlag(){
 void Cem::setCorrelatedModeFlag(){
 	correlateMode = true;
 }
+
+bool Cem::getCorrelatedModeFlag(){
+	return correlateMode;
+}
 #endif

@@ -29,10 +29,11 @@ int main(int argc,char* argv[]){
 	
 	// Plotting the Data in GenomeData.txt and saving it in Plots/ after renaming
 	system("gnuplot Source/plot.plt");
-
-	string command = "mv Plots/Plot.svg Plots/" + a.getFileName() + ".svg";
+	string folderExtension = ( a.getCorrelatedModeFlag() )? "CrossCorrelate":"AutoCorrelate";
+	
+	string command = "mv Plots/Plot.svg Plots/" + folderExtension + a.getFileName() + ".svg";
 	system(command.c_str());
-	command = "mv Data/GenomeData.txt Data/" + a.getFileName() + ".txt";
+	command = "mv Data/GenomeData.txt Data/" + folderExtension + a.getFileName() + ".txt";
 	system(command.c_str());
 
 	cout << "Output Generated: " << a.getFileName() << ".svg\"\n\n";
