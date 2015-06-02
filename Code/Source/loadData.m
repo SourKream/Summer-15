@@ -1,15 +1,11 @@
-cd ../Data;
 filelist = readdir (pwd);
 for ii = 1:numel(filelist)
 
   ## skip special files . and ..
-  if (regexp (filelist{ii}, "^\\.*"))
-    continue;
+  if (regexp (filelist{ii}, ".*\.txt$"))
+  	load(filelist{ii});
   endif
 
-  ## load your file
-  load(filelist{ii});
 endfor
 clear ii;
 clear filelist;
-cd ../Source;

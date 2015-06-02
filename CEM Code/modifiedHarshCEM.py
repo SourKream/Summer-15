@@ -2,6 +2,11 @@ import math
 import cmath
 import os
 
+global windowsize
+windowsize = 50000;
+global subwindowsize 
+subwindowsize = 200;
+
 def cem(f):
     file = open(f,'r')
     file.readline()
@@ -9,7 +14,7 @@ def cem(f):
     window=[]
     auto=[]
     #Initializing Window
-    while(j<10):
+    while(j<windowsize):
         window.append(0)
         j=j+1
     #End of initialization
@@ -22,11 +27,13 @@ def cem(f):
     for line in file:
         s=line
         l=list(s)
+        l = l[0:len(l)-1]
+#        print l
         size=len(l) # #(characters in line)
         i=0
         while(i<size):
-            if(j<10):
-                x=((j1+start)%10)
+            if(j<windowsize):
+                x=((j1+start)%windowsize)
                 window[x]=l[i]
 #                print window[x] + " " + l[i] + "\n"
                 j=j+1
@@ -37,7 +44,7 @@ def cem(f):
                 auto.append(auto_en(window,start))
                 j=shift
                 j1 = 0
-                start=(start+shift)%10
+                start=(start+shift)%windowsize
     return auto
 
 def auto_en(window,start):
@@ -45,23 +52,29 @@ def auto_en(window,start):
     j=0
     ent=[]
 #    print window
-    while(j<10):
-        subwin=[0 for wee in range(5)]
+    while(j<windowsize):
+        subwin=[0 for wee in range(subwindowsize)]
         i=0
-        while(i<5 and j<10):
-            subwin[i]=window[(j+start)%10]
+        while(i<subwindowsize and j<windowsize):
+            subwin[i]=window[(j+start)%windowsize]
             i=i+1
             j=j+1
 #        print subwin
         t=entrpy_d(subwin,start)
         ent.append(t)
+ #   print ent
+
+
     i=1
     ck=0.0
     maxi=len(ent)
     while(i<maxi):
         ck=ck+(math.fabs(crltn(i,ent)))
+#        print (crltn(i,ent))
         i=i+1
     cg=(ck)/(maxi-1)
+#    print "finally:"
+#    print cg
     return cg
 
 def crltn(i,ent):
@@ -85,10 +98,8 @@ def crltn(i,ent):
     while(k<(size)):
         devx=math.pow((ent[k]-meanx),2)+devx
         k=k+1
-    devx=devx/(size)
-    print size
-    print i
 
+    devx=devx/(size)
     sxy=sxy/(devx*(size - i))
     return sxy
 
@@ -100,6 +111,7 @@ def entrpy_d(window,start):
     l=window
     size=len(l)
     i=0
+    msize = size;
     while(i<size):
         if(l[i]=='A'):
             pa=pa+1.0
@@ -107,13 +119,15 @@ def entrpy_d(window,start):
             pt=pt+1.0
         elif(l[i]=='C'):
             pc=pc+1.0
-        else:
+        elif(l[i]=='G'):
             pg=pg+1.0
+        else:
+            msize = msize - 1;
         i=i+1
-    pa=pa/size
-    pt=pt/size
-    pc=pc/size
-    pg=pg/size
+    pa=pa/msize
+    pt=pt/msize
+    pc=pc/msize
+    pg=pg/msize
     entrpy=(-1)*((pa*log(pa))+(pt*log(pt))+(pc*log(pc))+(pg*log(pg)))
     return entrpy
 
