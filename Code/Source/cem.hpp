@@ -13,6 +13,7 @@ class Cem
 	float shiftFraction;
 	std::string fileName;
 	bool debug;
+	bool correlateMode; // true: CrossCorrelate false: autoCorrelate
 	std::vector<float> plotValues;
 	
 	 float AutoCorrelate (float [], int);
@@ -30,6 +31,7 @@ public:
 	void write(const std::string &);
 	std::string getFileName();
 	void setDebugFlag();
+	void setCorrelatedModeFlag();
 };
 
 #endif 

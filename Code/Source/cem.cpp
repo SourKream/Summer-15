@@ -16,12 +16,14 @@ Cem::Cem(int winSize,int subwinSize){
 		numSubWindows++;
 	shiftFraction = SHIFT_FRACTION;
 	debug=false;
+	correlateMode=false;
 }
 
 
 Cem::Cem(){
 	shiftFraction = SHIFT_FRACTION;
 	debug=false;
+	correlateMode=false;
 }
 
 
@@ -93,10 +95,14 @@ float Cem::CorrelatedEntropy(){
 	for (i=0; i*subWindowSize<windowLength; i++){
 		entropySequence[i] = Entropy(i*subWindowSize);						// and its entropy value stored in array
 	}
-	//return CrossCorrelate(entropySequence,i);		//Cross Correlation is applied on the array
-	return AutoCorrelate(entropySequence, i);		// Autocorrealtion is applied on the array
-													// and the resulting correlated entropy measure of the
-													// window is returned
+	if(correlateMode){
+		return CrossCorrelate(entropySequence,i);  		//Cross Correlation is applied on the array
+	}
+	else{		
+		return AutoCorrelate(entropySequence, i);		// Autocorrealtion is applied on the array
+														// and the resulting correlated entropy measure of the
+														// window is returned
+	}
 }
 
 
@@ -245,5 +251,9 @@ void Cem::write(const std::string &dest){
 
 void Cem::setDebugFlag(){
 	debug = true;
+}
+
+void Cem::setCorrelatedModeFlag(){
+	correlateMode = true;
 }
 #endif

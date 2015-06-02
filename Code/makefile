@@ -6,7 +6,8 @@ COMPILER=g++ -std=c++11
 FNAME="Genome/Genome.txt"
 WINSIZE=50000
 SUBWINSIZE=125
-DEBUG=0;
+DEBUG=0
+MODE=0
 all:
 	make $(EXE)
 
@@ -26,4 +27,4 @@ clean:
 	rm $(OBJ)*
 
 execute:$(EXE)
-	./$(EXE) $(FNAME) $(WINSIZE) $(SUBWINSIZE) $(DEBUG)
+	./$(EXE) $(FNAME) $(WINSIZE) $(SUBWINSIZE) $(DEBUG) $(MODE)
