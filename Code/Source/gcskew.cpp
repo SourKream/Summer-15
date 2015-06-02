@@ -28,7 +28,7 @@ float GcSkew::gcSkewEvaluate(){
 		else if(*it == 'C' || *it == 'c')
 			C_Count++;
 	}
-	return float(G_Count)/ float(C_Count);
+	return float(C_Count - G_Count)/ float(C_Count + G_Count);
 }
 
 void operate(const std::string& src){
