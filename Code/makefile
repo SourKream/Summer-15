@@ -2,6 +2,7 @@ SRC=Source/
 OBJ=Obj/
 DATA=Data/
 EXE=cem.out
+GEXE=gcskew.out
 COMPILER=g++ -std=c++11
 FNAME="Genome/Genome.txt"
 WINSIZE=50000
@@ -23,8 +24,22 @@ $(OBJ)main.o:$(SRC)main.cpp
 	mv main.o $@
 
 clean:
-	rm $(EXE)
+	rm $(EXE) $(GEXE)
 	rm $(OBJ)*
 
 execute:$(EXE)
 	./$(EXE) $(FNAME) $(WINSIZE) $(SUBWINSIZE) $(DEBUG) $(MODE)
+
+gcskew:$(GEXE)
+	./$(GEXE) $(FNAME) $(WINSIZE) $(DEBUG)
+
+$(GEXE): $(OBJ)gcskew.o $(OBJ)mainGcSkew.o
+	$(COMPILER) $^ -o $@
+
+$(OBJ)gcskew.o:$(SRC)gcskew.cpp $(SRC)gcskew.hpp
+	$(COMPILER) -c $<
+	mv gcskew.o $@
+
+$(OBJ)mainGcSkew.o:$(SRC)mainGcSkew.cpp
+	$(COMPILER) -c $<
+	mv mainGcSkew.o $@
