@@ -31,7 +31,7 @@ float GcSkew::gcSkewEvaluate(){
 	return float(C_Count - G_Count)/ float(C_Count + G_Count);
 }
 
-void operate(const std::string& src){
+void GcSkew::operate(const std::string& src){
 
 	std::fstream f;
 	f.open(src,std::ios::in);
@@ -90,7 +90,7 @@ void operate(const std::string& src){
 
 }
 
-void Cem::write(const std::string &dest){
+void GcSkew::write(const std::string &dest){
 	
 	std::fstream filOut;
 	filOut.open("Data/GenomeData.txt",std::ios::out);
@@ -99,7 +99,7 @@ void Cem::write(const std::string &dest){
 	}
 }
 
-void Cem::setDebugFlag(){
+void GcSkew::setDebugFlag(){
 	debug = true;
 }
 
