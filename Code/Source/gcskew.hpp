@@ -1,5 +1,10 @@
 #ifndef GC_SKEW_HPP
 #define GC_SKEW_HPP
+#include <vector>
+#include <string>
+#include <cmath>
+#include <fstream>
+#include <iostream>
 
 class GcSkew{
 	int windowSize;
@@ -16,6 +21,6 @@ public:
 	void write(const std::string &);
 	std::string getFileName();
 	void setDebugFlag();
-	void setWindowSize();
+	void setWindowSize(int);
 };
 #endif

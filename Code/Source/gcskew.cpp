@@ -2,7 +2,7 @@
 #define GC_SKEW_CPP
 
 #define SHIFT_FRACTION 1 
-
+#include "gcskew.hpp"
 std::string GcSkew::getFileName(){
 	return fileName;
 }
@@ -43,7 +43,7 @@ void GcSkew::operate(const std::string& src){
 
 	fileName = src.substr(src.find_last_of('/')+1);
 	fileName = fileName.substr(0,fileName.find_last_of('.'));
-	fileName += "_" + std::to_string(windowSize) + "_" + std::to_string(subWindowSize);
+	fileName += "_" + std::to_string(windowSize);
 
 	getline(f,currWindow); //Skipping the first line
 	
