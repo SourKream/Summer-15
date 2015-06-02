@@ -28,14 +28,13 @@ def cem(f):
             if(j<50000):
                 x=((j1+start)%50000)
                 window[x]=l[i]
-                print window[x] + " " + l[i] + "\n"
                 j=j+1
                 j1 = j1 + 1
-            '''else:     
+            else:     
                 auto.append(auto_en(window,start))
                 j=shift
                 j1 = 0
-                start=(start+shift)%50000'''
+                start=(start+shift)%50000
             i=i+1
     return auto
 
@@ -131,4 +130,4 @@ def log(x):
     else:
         return math.log(x)
 
-print cem("NC_023028.fna")
+print cem("NC_013209.fna")
