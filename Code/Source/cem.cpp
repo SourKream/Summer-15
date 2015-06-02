@@ -216,7 +216,7 @@ void Cem::operate(const std::string& src){
 			std::cout<<"\nWINDOW: "<<"\n";
 			for (auto it=currWindow.begin();it!=currWindow.end();++it,parse++){
 				std::cout<<*it;
-				if(parse%subWindowSize==0)
+				if(parse%80==0)
 					std::cout<<"\n";
 			}
 		}
@@ -239,9 +239,7 @@ void Cem::operate(const std::string& src){
 }
 
 void Cem::write(const std::string &dest){
-	/*for(int i=0;i<plotValues.size();++i){
-		std::cout<<i+1<<" : "<<plotValues[i]<<"\n";
-	}*/
+	
 	std::fstream filOut;
 	filOut.open("Data/GenomeData.txt",std::ios::out);
 	for(int i=0;i<plotValues.size();i++){
