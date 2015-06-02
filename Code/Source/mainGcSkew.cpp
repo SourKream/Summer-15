@@ -18,7 +18,7 @@ int main(int argc,char* argv[]){
 	a.operate(argv[1]);
 	a.write("");
 
-	
+	/*	
 	system("gnuplot Source/plot.plt");
 	
 	string command = "mv Plots/Plot.svg Plots/GCSkew/GC_" + a.getFileName() + ".svg";
@@ -27,7 +27,7 @@ int main(int argc,char* argv[]){
 	system(command.c_str());
 
 	cout << "Output Generated: GCSkew/GC_" << a.getFileName() << ".svg\"\n\n";
-
+	*/
 
 	return 0;
 }
