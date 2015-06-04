@@ -7,7 +7,8 @@ function cost = clusterCostFunction(X,centroids,idx)
 	k = size(centroids,1); 
 	cost = 0;
 	for i = 1:m
-		cost = cost + ( X(i,:)' - ( centroids(idx(i,:),:)' )' *  ( X(i,:)' - centroids(idx(i,:),:)' ) );
+		tmp_cost = (( X(i,:)' - ( centroids(idx(i,:),:)' ))')*( X(i,:)' - ( centroids(idx(i,:),:)' ));
+		cost = cost + tmp_cost;
 	end
 	cost = 1/m * cost;
 end

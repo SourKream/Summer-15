@@ -12,7 +12,7 @@ function [centroids,idx,cost] = runKMean(X,k)
 		%Running K Mean 20 times
 		[tmp_centroids,tmp_idx,cost] = clusterFormation(X,initial_centroids,20);
 		if(cost<minCost)
-			minCost = cost
+			minCost = cost;
 			centroids = tmp_centroids;
 			idx = tmp_idx;
 		end

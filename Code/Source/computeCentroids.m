@@ -4,7 +4,7 @@ function centroids = computeCentroids(X,idx,k)
 	% m = #(training examples); n = #(features); k = #(clusters) 
 	[m n] = size(X);
 	centroids = zeros(k,n);
-	numElem = zeros(K,1);
+	numElem = zeros(k,1);
 	for i = 1:m
 		centroids(idx(i,:),:) = centroids(idx(i,:),:) + X(i,:);
 		numElem(idx(i,:),:) = numElem(idx(i,:),:) + 1;
@@ -13,5 +13,6 @@ function centroids = computeCentroids(X,idx,k)
 	idx = (numElem(:,1) != 0);
 	numElem = numElem(idx,:);
 	centroids = centroids(idx,:);
+	numElem = numElem * ones(1,size(centroids,2));
 	centroids = centroids ./ numElem;
 end
