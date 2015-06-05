@@ -2,7 +2,7 @@ function [J grad] = costFunction(nn_params,hidden_layer_size,num_labels,X,y,lamb
 	% nn_params is the unrolled version of theta1 and theta2
 	% X is the training set, without X0
 	% input_layer_size is the # features in the Training Set and m is the # examples in the training set.
-	% y is the output set. yi belong in {1,2,...output_layer_size}
+	% y is the output set. yi belong in {1,2,...num_labels}
 	% lambda is the regularization parameter.
 	input_layer_size = size(X,2);
 	Theta1 = reshape(nn_params(1:(hidden_layer_size*(input_layer_size+1))),hidden_layer_size,input_layer_size+1);

@@ -23,7 +23,7 @@ function [optimTheta,cost] = trainNeuralNetwork(X_train,y_train,lambda,hidden_la
 	initTheta2 = initializeWeights(output_layer_size,hidden_layer_size,epsilon);
 	initTheta = [initTheta1(:); initTheta2(:)];
 
-	%setting the maximum iterations to 50
+	%setting the maximum iterations to 100
 	options = optimset('MaxIter', 100);
 
 	%Using conjugate gradient method along the Polak-Riberie direction and line search, as given in the fmincg function.
