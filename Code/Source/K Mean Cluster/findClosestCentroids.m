@@ -8,15 +8,10 @@ function idx = findClosestCentroids(X, centroids)
 	idx = zeros(m, 1);
 
 	for i = 1:m
-		minimum_ind = 1;
-		minimum_value = (centroids(1,:)' - X(i,:)')'*(centroids(1,:)' - X(i,:)');
-		for j = 2:k
-		if((centroids(j,:)' - X(i,:)')'*(centroids(j,:)' - X(i,:)') < minimum_value) 
-			minimum_value = (centroids(j,:)' - X(i,:)')'*(centroids(j,:)' - X(i,:)');
-			minimum_ind = j;
-		end
+		vec = X(i,:);
+		Diff = centroids - ones(k,1) * vec;
+		Cost = sum(Diff .^ 2,2);
+		[min_cost, idx(i,:)] = min(Cost);
 	end
-	idx(i,:) = minimum_ind;
-end
 
 end
