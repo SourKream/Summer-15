@@ -12,6 +12,6 @@ function cost = clusterCostFunction(X,centroids,idx)
 		resp_centroids = [resp_centroids; centroids(idx(i,:),:)];
 	end
 
-	cost = (1/m) * sum(sum((X - resp_centroids).^2))
+	cost = (1/m) * sum(sum((X - resp_centroids).^2));
 
 end
