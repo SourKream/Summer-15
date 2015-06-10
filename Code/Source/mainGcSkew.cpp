@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc,char* argv[]){
 	if(argc!=4){
-		cout << "\nSyntax: ./GCSKEW.o <File_Name> <Window_Size> <Debug_State>\n\n";
+		cout << "\nSyntax: ./gcskew.out <File_Name(FNAME)> <Window_Size(WINSIZE)> <Debug_State(DEBUG)>\n\n";
 		return 1;
 	}
 	int winSize=atoi(argv[2]),debugValue=atoi(argv[3]);
@@ -16,7 +16,7 @@ int main(int argc,char* argv[]){
 	}
 
 	a.operate(argv[1]);
-	string filePath = "Genome/" + a.getGenomeName() + "/GCSkew/GC_" + a.getFileName() + ".txt";
+	string filePath = "Genome/" +o a.getGenomeName() + "/GCSkew/GC_" + a.getFileName() + ".txt";
 	a.write(filePath);
 		
 //	system("gnuplot Source/plot.plt");	

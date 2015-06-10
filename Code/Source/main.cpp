@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc,char* argv[]){
 	if(argc!=6){
-		cout << "\nSyntax: ./cem.out <File_Name> <Window_Size> <SubWindow_Size> <Debug_State> <Correlation_mode>\n\n";
+		cout << "\nSyntax: ./cem.out <File_Name(FNAME)> <Window_Size(WINSIZE)> <SubWindow_Size(SUBWINSIZE)> <Debug_State(DEBUG)> <Correlation_mode(MODE)>\n\n";
 		return 1;
 	}
 	int winSize=atoi(argv[2]),subWinSize=atoi(argv[3]),debugValue=atoi(argv[4]),correlationValue = atoi(argv[5]);
