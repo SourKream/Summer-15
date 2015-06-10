@@ -4,7 +4,7 @@ DATA=Data/
 EXE=cem.out
 GEXE=gcskew.out
 COMPILER=g++ -std=c++11
-FNAME="Genome/Genome.txt"
+FNAME=
 WINSIZE=50000
 SUBWINSIZE=125
 DEBUG=0

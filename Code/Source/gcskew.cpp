@@ -7,6 +7,10 @@ std::string GcSkew::getFileName(){
 	return fileName;
 }
 
+std::string GcSkew::getGenomeName(){
+	return genomeName;
+}
+
 GcSkew::GcSkew(int winSize){
 	windowSize = winSize;
 	shiftFraction = SHIFT_FRACTION;
@@ -46,6 +50,7 @@ void GcSkew::operate(const std::string& src){
 
 	fileName = src.substr(src.find_last_of('/')+1);
 	fileName = fileName.substr(0,fileName.find_last_of('.'));
+	genomeName = fileName;
 	fileName += "_" + std::to_string(windowSize);
 
 	getline(f,currWindow); //Skipping the first line
@@ -98,7 +103,7 @@ void GcSkew::operate(const std::string& src){
 void GcSkew::write(const std::string &dest){
 	
 	std::fstream filOut;
-	filOut.open("Data/GenomeData.txt",std::ios::out);
+	filOut.open(dest,std::ios::out);
 	for(int i=0;i<plotValues.size();i++){
 		filOut<<plotValues[i]<<"\n";
 	}

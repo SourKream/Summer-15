@@ -11,7 +11,8 @@ class Cem
 	int subWindowSize;
 	int numSubWindows;
 	float shiftFraction;
-	std::string fileName;
+	std::string fileName;		// <Genome Name>_<Window Size>_<Sub-Window Size>
+	std::string genomeName; 	// <Genome Name>
 	bool debug;
 	bool correlateMode; // true: CrossCorrelate false: autoCorrelate
 	std::vector<float> plotValues;
@@ -30,6 +31,7 @@ public:
 	void operate(const std::string &);
 	void write(const std::string &);
 	std::string getFileName();
+	std::string getGenomeName();
 	void setDebugFlag();
 	void setCorrelatedModeFlag();
 	bool getCorrelatedModeFlag();

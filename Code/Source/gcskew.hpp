@@ -10,6 +10,7 @@ class GcSkew{
 	int windowSize;
 	float shiftFraction;
 	std::string fileName;
+	std::string genomeName;
 	bool debug;
 	std::vector<float> plotValues;
 	std::string currWindow;
@@ -20,6 +21,7 @@ public:
 	void operate(const std::string &);
 	void write(const std::string &);
 	std::string getFileName();
+	std::string getGenomeName();
 	void setDebugFlag();
 	void setWindowSize(int);
 };

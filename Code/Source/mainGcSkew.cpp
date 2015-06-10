@@ -16,17 +16,16 @@ int main(int argc,char* argv[]){
 	}
 
 	a.operate(argv[1]);
-	a.write("");
-
+	string filePath = "Genome/" + a.getGenomeName() + "/GCSkew/GC_" + a.getFileName() + ".txt";
+	a.write(filePath);
 		
-	system("gnuplot Source/plot.plt");
-	
-	string command = "mv Plots/Plot.svg Plots/GCSkew/GC_" + a.getFileName() + ".svg";
-	system(command.c_str());
-	command = "mv Data/GenomeData.txt Data/GCSkew/GC_" + a.getFileName() + ".txt";
-	system(command.c_str());
+//	system("gnuplot Source/plot.plt");	
+//	string command = "mv Plots/Plot.svg Plots/GCSkew/GC_" + a.getFileName() + ".svg";
+//	system(command.c_str());
+//	command = "mv Data/GenomeData.txt Data/GCSkew/GC_" + a.getFileName() + ".txt";
+//	system(command.c_str());
 
-	cout << "Output Generated: GCSkew/GC_" << a.getFileName() << ".svg\"\n\n";
+	cout << "Output Generated: Genome/" << a.getGenomeName() << "/GCSkew/GC_" << a.getFileName() << ".txt\"\n\n";
 	
 
 	return 0;

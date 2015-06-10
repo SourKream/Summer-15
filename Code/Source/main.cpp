@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc,char* argv[]){
 	if(argc!=6){
-		cout << "\nSyntax: ./CEM.o <File_Name> <Window_Size> <SubWindow_Size> <Debug_State> <Correlation_mode>\n\n";
+		cout << "\nSyntax: ./cem.out <File_Name> <Window_Size> <SubWindow_Size> <Debug_State> <Correlation_mode>\n\n";
 		return 1;
 	}
 	int winSize=atoi(argv[2]),subWinSize=atoi(argv[3]),debugValue=atoi(argv[4]),correlationValue = atoi(argv[5]);
@@ -25,20 +25,20 @@ int main(int argc,char* argv[]){
 	}
 
 	a.operate(argv[1]);
-	a.write("");
 
-	
-	// Plotting the Data in GenomeData.txt and saving it in Plots/ after renaming
-	system("gnuplot Source/plot.plt");
 	string folderExtension = (a.getCorrelatedModeFlag())? "CrossCorrelate/":"AutoCorrelate/";
 	string fileExtension = (a.getCorrelatedModeFlag())? "CC_":"AC_"; 
+	string filePath = "Genome/" + a.getGenomeName() + "/" + folderExtension + fileExtension + a.getFileName() + ".txt";
+	a.write(filePath);
 
-	string command = "mv Plots/Plot.svg Plots/" + folderExtension + fileExtension + a.getFileName() + ".svg";
-	system(command.c_str());
-	command = "mv Data/GenomeData.txt Data/" + folderExtension + fileExtension + a.getFileName() + ".txt";
-	system(command.c_str());
+// Plotting the Data in GenomeData.txt and saving it in Plots/ after renaming
+//	system("gnuplot Source/plot.plt");
+//	string command = "mv Plots/Plot.svg Plots/" + folderExtension + fileExtension + a.getFileName() + ".svg";
+//	system(command.c_str());
+//	command = "mv Data/GenomeData.txt Data/" + folderExtension + fileExtension + a.getFileName() + ".txt";
+//	system(command.c_str());
 
-	cout << "Output Generated: " << folderExtension << fileExtension << a.getFileName() << ".svg\"\n\n";
+	cout << "Output Generated: Genome/" << a.getGenomeName() << "/" << folderExtension << fileExtension << a.getFileName() << ".txt\"\n\n";
 
 return 0;
 }
