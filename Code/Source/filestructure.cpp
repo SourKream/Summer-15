@@ -10,9 +10,8 @@ int main(int argc,char* argv[]){
 		cout<<"SYNTAX: ./filestructure.out <FILENAME>\n";
 		return 1;
 	}
-	name.erase(name.find(".txt"),4);
-	path root("");
-	path folderName = root/name;
+	path root(name);
+	path folderName = root.parent_path();
 	
 	if(!exists(folderName) || !is_directory(folderName)){
 		create_directory(folderName);
