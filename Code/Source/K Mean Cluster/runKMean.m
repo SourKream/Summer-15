@@ -1,7 +1,7 @@
 function [centroids,idx,cost] = runKMean(X,k)
 	%Takes in data set and number of clusters and returns the centroids and the mappings
 	[m n] = size(X);
-	max_iter = 10;
+	max_iter = 20;
 	centroids = zeros(k,n);
 	idx = zeros(m,1);
 	tmp_centroids = centroids;
