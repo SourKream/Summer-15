@@ -16,7 +16,7 @@ int main(int argc,char* argv[]){
 	}
 
 	a.operate(argv[1]);
-	string filePath = "Genome/" +o a.getGenomeName() + "/GCSkew/GC_" + a.getFileName() + ".txt";
+	string filePath = "Genome/" + a.getGenomeName() + "/GCSkew/GC_" + a.getFileName() + ".txt";
 	a.write(filePath);
 		
 //	system("gnuplot Source/plot.plt");	

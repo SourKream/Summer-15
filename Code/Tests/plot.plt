@@ -1,4 +1,4 @@
 set terminal svg
-set output "Plot.svg"
+set output "Plots/Plot.svg"
 set xlabel "Window Number"
-plot "Output.txt" with lines, "Output.txt" with points
+plot "Data/GenomeData.txt" with lines, "Data/GenomeData.txt" with points
