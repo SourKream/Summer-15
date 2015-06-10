@@ -17,9 +17,9 @@ int main(int argc,char* argv[]){
 		create_directory(folderName);
 	}
 	root=folderName;
-	path autoCorrelate = root/"auto";
-	path crossCorrelate = root/"cross";
-	path gcskew = root/"gcskew";
+	path autoCorrelate = root/"AutoCorrelate";
+	path crossCorrelate = root/"CrossCorrelate";
+	path gcskew = root/"GCSkew";
 	if(!exists(autoCorrelate) || !is_directory(autoCorrelate)){
 		create_directory(autoCorrelate);
 	}
