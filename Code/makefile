@@ -1,16 +1,26 @@
 SRC=Source/
 OBJ=Obj/
 DATA=Data/
+EXE2=filestructure.out
 EXE=cem.out
 GEXE=gcskew.out
 COMPILER=g++ -std=c++11
 FNAME=
+LIBS=-lboost_filesystem -lboost_system
 WINSIZE=50000
 SUBWINSIZE=125
 DEBUG=0
 MODE=0
 all:
 	make $(EXE)
+	make $(EXE2)
+
+$(EXE2): $(OBJ)filestructure.o
+	$(COMPILER) $^ -o $@ $(LIBS)
+
+$(OBJ)filestructure.o:$(SRC)filestructure.cpp
+	$(COMPILER) -c $< 
+	mv filestructure.o $@
 
 $(EXE): $(OBJ)cem.o $(OBJ)main.o
 	$(COMPILER) $^ -o $@
@@ -23,11 +33,12 @@ $(OBJ)main.o:$(SRC)main.cpp
 	$(COMPILER) -c $<
 	mv main.o $@
 
-clean:
-	rm $(EXE) $(GEXE)
+clean: 
 	rm $(OBJ)*
+	rm $(EXE) $(EXE2) $(GEXE) 
 
-execute:$(EXE)
+execute:$(EXE) $(EXE2)
+	./$(EXE2) $(FNAME)
 	./$(EXE) $(FNAME) $(WINSIZE) $(SUBWINSIZE) $(DEBUG) $(MODE)
 
 gcskew:$(GEXE)

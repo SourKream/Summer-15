@@ -1,11 +1,18 @@
 #include <iostream>
+#include <string>
 #include <boost/filesystem.hpp>
 using namespace std;
 using namespace boost::filesystem;
 
 int main(int argc,char* argv[]){
-	path root("Genome");
-	path folderName = root/argv[1];
+	string name=argv[1];
+	if(name==""){
+		cout<<"SYNTAX: ./filestructure.out <FILENAME>\n";
+		return 1;
+	}
+	name.erase(name.find(".txt"),4);
+	path root("");
+	path folderName = root/name;
 	
 	if(!exists(folderName) || !is_directory(folderName)){
 		create_directory(folderName);
