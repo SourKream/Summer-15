@@ -1,11 +1,13 @@
 SRC=Source/
 OBJ=Obj/
 DATA=Data/
-EXE2=filestructure.out
 EXE=cem.out
+EXE2=filestructure.out
+EXE3=folderStructure.out
 GEXE=gcskew.out
 COMPILER=g++ -std=c++11
 FNAME=
+GENOME=Genome
 LIBS=-lboost_filesystem -lboost_system
 WINSIZE=50000
 SUBWINSIZE=125
@@ -41,7 +43,10 @@ execute:$(EXE) $(EXE2)
 	./$(EXE2) $(FNAME)
 	./$(EXE) $(FNAME) $(WINSIZE) $(SUBWINSIZE) $(DEBUG) $(MODE)
 
-gcskew:$(GEXE)
+allGCSkew:
+	make $(GEXE)
+
+executeGCSkew:$(GEXE)
 	./$(GEXE) $(FNAME) $(WINSIZE) $(DEBUG)
 
 $(GEXE): $(OBJ)gcskew.o $(OBJ)mainGcSkew.o
@@ -54,3 +59,20 @@ $(OBJ)gcskew.o:$(SRC)gcskew.cpp $(SRC)gcskew.hpp
 $(OBJ)mainGcSkew.o:$(SRC)mainGcSkew.cpp
 	$(COMPILER) -c $<
 	mv mainGcSkew.o $@
+
+download: script.py
+	python $<
+
+allFolderStruct:
+	make $(EXE3)
+
+executeFolderStruct:$(EXE3)
+	./$(EXE3) $(GENOME)
+
+$(EXE3):$(OBJ)folderStructure.o
+	$(COMPILER) $^ -o $@ $(LIBS)
+
+$(OBJ)folderStructure.o:$(SRC)folderStructure.cpp
+	$(COMPILER) -c $<
+	mv folderStructure.o $@
+
