@@ -1,5 +1,8 @@
-function plotCost = plotCostForData (data, peak, epsilon, option='b')
-
+function plotCost = plotCostForData (data, drawMode ,peak, epsilon, option='b')
+	%TAKES IN RAW DATA MATRIX.
+	if ~exist('drawMode','var') || isempty(drawMode)
+		drawMode = false;
+	end
 	X = data(:,2:end);
 	index = data(:,1);
 	plotCost = [];
@@ -15,8 +18,9 @@ function plotCost = plotCostForData (data, peak, epsilon, option='b')
 	for i=1:size(X,1)
 		plotCost = [plotCost; cost(X(i,:), peak, epsilon)];
 	end
-
-	plot(index, plotCost, 'o', 'color', option);
+	if(drawMode)
+		plot(index, plotCost, 'o', 'color', option);
+	end
 	plotCost = [index, plotCost];
 
 end
