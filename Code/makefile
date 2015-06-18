@@ -40,7 +40,7 @@ clean:
 	rm $(EXE) $(EXE2) $(GEXE) 
 
 execute:$(EXE) $(EXE2)
-	./$(EXE2) $(FNAME)
+	#./$(EXE2) $(FNAME)
 	./$(EXE) $(FNAME) $(WINSIZE) $(SUBWINSIZE) $(DEBUG) $(MODE)
 
 allGCSkew:
