@@ -10,6 +10,9 @@ function plotCost = plotCostForData (data, drawMode ,peak, epsilon, option='b')
 	[a,b] = max(X,'',2);
 	if ~exist('epsilon','var') || isempty(epsilon)
 		epsilon = sqrt(mean((b - mode(b)).^2));
+		if(epsilon==0)
+			epsilon=1;
+		end
 	end
 	if ~exist('peak','var') || isempty(peak)
 		peak = mode(b);
