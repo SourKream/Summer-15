@@ -17,5 +17,8 @@ function [indexVector,costVector] = processData(numGraphs)
 		[index,mCost] = costFunc(directory);
 		indexVector(i,:) = index';
 		costVector(i,:) = mCost';
+		fprintf('Genome:%3i Processed...\r',i);
+		fflush(stdout);
 	end
+	fprintf('\n');
 end
