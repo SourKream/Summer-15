@@ -1,4 +1,4 @@
-function output = plotHistForData(data,epsilon)
+function output = plotHistForData(data,epsilon,flag=false)
 	if ~exist('epsilon','var') || isempty(epsilon)
 		epsilon = 10;
 	end
@@ -10,7 +10,11 @@ function output = plotHistForData(data,epsilon)
 		found = [found; f];
 	end
 	[a,b] = max(X,'',2);
-	hist(b(find(found==1)),epsilon);
+	if (flag)
+		hist(b(find(found==1)),epsilon);
+	else
+		hist(b,epsilon);
+	end
 	output = [index, found, b];
 
 end
