@@ -15,9 +15,11 @@ int main(int argc, char* argv[]){
 	directory_iterator it(root),eod;
 	BOOST_FOREACH(path const& p,make_pair(it,eod)){
 		if(is_directory(p)){
-			BOOST_FOREACH(path const& q,make_pair(p,eod)){
+			directory_iterator dir(p);
+			BOOST_FOREACH(path const& q,make_pair(dir,eod)){
 				if(is_regular_file(q)){
-					path dest = it / q.filename().string();
+					path dest(root);
+					dest /= q.filename().string();
 					copy_file(q,dest);
 				}
 			}
