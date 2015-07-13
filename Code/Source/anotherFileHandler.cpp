@@ -18,8 +18,7 @@ int main(int argc, char* argv[]){
 			directory_iterator dir(p);
 			BOOST_FOREACH(path const& q,make_pair(dir,eod)){
 				if(is_regular_file(q)){
-					if(regex_match(q.filename().string(),regex(".*DS_S.*")));
-					else{
+					if(regex_match(q.filename().string(),regex("NC_.*"))){
 						path dest(root);
 						dest /= q.filename().string();
 						copy_file(q,dest);
