@@ -6,12 +6,15 @@
 using namespace std;
 using namespace boost::filesystem;
 
-int main(int argc,char* argv[]){
-	if(argc!=2){
+int main(){
+	/*if(argc!=2){
 		cout<<"ERROR: SYNTAX: ./folderStructure.out <FOLDER_NAME>\n";
 		return 1;
-	}
-	path root(argv[1]);
+	}*/
+	string fname;
+	cout<<"Enter folder name \n";
+	cin>>fname;
+	path root(fname);
 	directory_iterator it(root),eod;
 	int count=0;
 	BOOST_FOREACH(path const& p, make_pair(it,eod)){
@@ -26,8 +29,8 @@ int main(int argc,char* argv[]){
 				if(!exists(dest_folder) || !is_directory(dest_folder)){
 					create_directory(dest_folder);
 				}
-				copy_file(src_file,dest_file);
-				remove_all(src_file);
+				rename(src_file,dest_file);
+//				remove_all(src_file);
 				path autoCorrelate = dest_folder/"AutoCorrelate";
 				path crossCorrelate = dest_folder/"CrossCorrelate";
 				path gcskew = dest_folder/"GCSkew";

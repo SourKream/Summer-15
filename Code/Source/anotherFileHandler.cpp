@@ -21,7 +21,7 @@ int main(int argc, char* argv[]){
 					if(regex_match(q.filename().string(),regex("NC_.*"))){
 						path dest(root);
 						dest /= q.filename().string();
-						copy_file(q,dest);
+						rename(q,dest);
 					}
 				}
 			}
