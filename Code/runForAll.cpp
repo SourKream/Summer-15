@@ -60,7 +60,7 @@ int main()
 		if(filename.length()>2){
 			//So that \n at the end is not counted
 			//Removes .fna extension.
-			filename = filename.erase(file.find_first_of("."));
+			filename = filename.erase(filename.find_first_of("."));
 			filenames.push_back(filename);
 		}
 	}
