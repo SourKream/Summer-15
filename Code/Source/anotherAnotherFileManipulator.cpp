@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <unordered_set>
 #include <boost/filesystem.hpp>
@@ -29,7 +30,7 @@ int main(){
 		if(is_regular_file(p)){
 			if(regex_match(p.filename().string(),regex("NC.*"))){
 				auto got = dirOfFiles.find(p.filename().string());
-				if(got==dirOfFiles.end()){
+				if(got!=dirOfFiles.end()){
 					remove_all(p);
 				}
 			}
