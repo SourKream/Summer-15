@@ -48,24 +48,24 @@ void *threadFunction(void* attribute){
 int main()
 {
 	
-	
 	fstream fil;
-	fil.open("Genome/GenomeList.txt",ios::in);
+	string mFileName;
+	cout<<"Enter List of File names: ";
+	cin>>mFileName;
+	fil.open(mFileName,ios::in);
 
 	string filename;
-	char line[100];
-	int count = 0;
-	while(fil.getline(line,100)){
-		filename = line;
-		filename = filename.substr(0,filename.find_last_of('.'));
-		if(filename=="NC_008321")
-			count=1;
-		if(count==1)
+	while(!fil.eof()){
+		fil>>filename;
+		if(filename.length()>2){
+			//So that \n at the end is not counted
+			//Removes .fna extension.
+			filename = filename.erase(file.find_first_of("."));
 			filenames.push_back(filename);
+		}
 	}
 	fil.close();
-
-	int numThreads = 4;
+	int numThreads = 5;
 	pthread_t* thread = new pthread_t[numThreads];
 	attr* attributes = new attr[numThreads];
 	int numFiles = filenames.size();
