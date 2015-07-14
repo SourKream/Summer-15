@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <pthread.h>
+#include <regex>
 using namespace std;
 vector<string> filenames;
 struct attr{
@@ -57,11 +58,17 @@ int main()
 	string filename;
 	while(!fil.eof()){
 		fil>>filename;
-		if(filename.length()>2){
+		if(regex_match(filename,regex("NC_.*"))){
 			//So that \n at the end is not counted
 			//Removes .fna extension.
-			filename = filename.erase(filename.find_first_of("."));
-			filenames.push_back(filename);
+			if(filename.find_first_of(".")==std::string::npos){
+				filenames.push_back(filename);
+				
+			}
+			else{
+				filename = filename.erase(filename.find_first_of("."));
+				filenames.push_back(filename);
+			}
 		}
 	}
 	fil.close();
