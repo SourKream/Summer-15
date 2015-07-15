@@ -3,3 +3,5 @@ CC*.txt
 AC*.txt
 GC*.txt
 NC*.txt
+*.o
+*.out
