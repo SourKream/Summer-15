@@ -1,7 +1,7 @@
 function resultVector = queryGenome(indexVector)
 	numQuery = length(indexVector);
 	resultVector = cell(numQuery,1);
-	fid = fopen('ListOfDownloadedGenomes.txt');
+	fid = fopen('ListOfGenomes.txt');
 	n = 372;
 	genomelist = cell(n,1);
 	for i = 1:n
