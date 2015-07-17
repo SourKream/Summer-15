@@ -1,3 +1,5 @@
+// Collects all the NC_.* files from separate sub folders and places them together in the root filder.
+
 #include <iostream>
 #include <string>
 #include <boost/filesystem.hpp>

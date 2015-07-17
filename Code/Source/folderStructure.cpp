@@ -1,3 +1,5 @@
+// Puts each .txt into a folder of the same name
+
 #include <iostream>
 #include <string>
 #include <boost/filesystem.hpp>
@@ -31,18 +33,18 @@ int main(){
 				}
 				rename(src_file,dest_file);
 //				remove_all(src_file);
-				path autoCorrelate = dest_folder/"AutoCorrelate";
-				path crossCorrelate = dest_folder/"CrossCorrelate";
-				path gcskew = dest_folder/"GCSkew";
-				if(!exists(autoCorrelate) || !is_directory(autoCorrelate)){
-					create_directory(autoCorrelate);
-				}
-				if(!exists(crossCorrelate) || !is_directory(crossCorrelate)){
-					create_directory(crossCorrelate);
-				}
-				if(!exists(gcskew) || !is_directory(gcskew)){
-					create_directory(gcskew);
-				}
+//				path autoCorrelate = dest_folder/"AutoCorrelate";
+//				path crossCorrelate = dest_folder/"CrossCorrelate";
+//				path gcskew = dest_folder/"GCSkew";
+//				if(!exists(autoCorrelate) || !is_directory(autoCorrelate)){
+//					create_directory(autoCorrelate);
+//				}
+//				if(!exists(crossCorrelate) || !is_directory(crossCorrelate)){
+//					create_directory(crossCorrelate);
+//				}
+//				if(!exists(gcskew) || !is_directory(gcskew)){
+//					create_directory(gcskew);
+//				}
 				count++;
 			}
 			

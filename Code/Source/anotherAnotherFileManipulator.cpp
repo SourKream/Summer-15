@@ -1,3 +1,6 @@
+// If line 36 reads == Then: Keeps only the files mentioned in the list of files.
+// If line 36 reads != Then: Removes all the files mentioned in the list of files.
+
 #include <iostream>
 #include <fstream>
 #include <string>
