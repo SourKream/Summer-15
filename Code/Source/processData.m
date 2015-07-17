@@ -1,11 +1,11 @@
 function [indexVector,costVector] = processData(numGraphs)
 	if ~exist('numGraphs','var') || isempty(numGraphs)
-		numGraphs = 372;
+		numGraphs = 500;
 	end
 	indexVector = zeros(numGraphs,951);
 	costVector = zeros(numGraphs,951);
-	fid = fopen('GenomeList.txt');
-	n = 372;
+	fid = fopen('ListOfGenomes.txt');
+	n = 500;
 	genomelist = cell(n,1);
 	for i = 1:n
 		line = fgets(fid);
@@ -13,8 +13,7 @@ function [indexVector,costVector] = processData(numGraphs)
 		genomelist{i} = strtrim(name);
 	end
 	for i = 1:numGraphs
-		directory = strcat(genomelist{i},'/AutoCorrelate/');
-		[index,mCost] = costFunc(directory);
+		[index,mCost] = costFunc(genomelist{i});
 		indexVector(i,:) = index';
 		costVector(i,:) = mCost';
 		fprintf('Genome:%3i Processed...\r',i);
