@@ -1,4 +1,7 @@
-function [index,plotCost] = costFunc(genome,drawMode,numBins)
+function [plotCost] = costFunc(genome,drawMode,numBins)
+
+	%Takes in a genome name and returns a vector of 951 * 1, with each element being the cost of the corresponding graph.
+	
 	if ~exist('numBins','var') || isempty(numBins)
 		numBins = 20;
 	end
@@ -10,9 +13,7 @@ function [index,plotCost] = costFunc(genome,drawMode,numBins)
 	if(drawMode)
 		subplot(1,2,2);
 	end
-	p = plotCostForData(X,drawMode);
-	index = p(:,1);
-	plotCost = p(:,2);
+	plotCost = plotCostForData(X,drawMode);
 	if(drawMode)
 		subplot(1,2,1);
 		hist(plotCost,numBins);

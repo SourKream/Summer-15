@@ -1,5 +1,6 @@
 function cost = cost(data, peak, epsilon)
-
+% data is a 1 * winsize matrix
+% cost is a float value
 %	cost = sigmoid(max(abs(findGradient(data)))-2.5);
 	stddev = std(data);
 	if (stddev == 0)
