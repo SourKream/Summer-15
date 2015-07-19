@@ -25,7 +25,8 @@ function plotCost = plotCostForData (data, drawMode ,peak, epsilon, option='b')
 	for i=1:size(data,1)
 		plotCost = [plotCost; cost(data(i,:), peak, epsilon)];
 	end
+
 	if(drawMode)
-		plot(index, plotCost, 'o', 'color', option);
+		plot([50:1000], plotCost, 'o', 'color', option);
 	end
 end

@@ -2,8 +2,8 @@ function output = plotHistForData(data,epsilon,flag=false)
 	if ~exist('epsilon','var') || isempty(epsilon)
 		epsilon = 10;
 	end
-	index = data(:,1);
-	X = data(:,2:end);
+%	index = data(:,1);
+	X = data;
 	found = [];
 	for i=1:size(X,1)
 		f = findOri(X(i,:)');
@@ -15,6 +15,6 @@ function output = plotHistForData(data,epsilon,flag=false)
 	else
 		hist(b,epsilon);
 	end
-	output = [index, found, b];
+	output = [found, b];
 
 end

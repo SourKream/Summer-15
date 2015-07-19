@@ -14,6 +14,9 @@ function cost = cost(data, peak, epsilon)
 	cost = sum(y./(1 + (x-posMaxData).^2)) / length(y);
 	cost = 1 - exp(-cost);
 	
+	if (epsilon < 5)		% Added later
+		epsilon = 5;
+	end
 	cost = cost *  sin(pi * (exp(-((((posMaxData-peak)/epsilon)^2)*(log(2)))) - 0.5));
 
 end
