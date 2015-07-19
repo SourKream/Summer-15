@@ -1,7 +1,10 @@
 .DS_Store
+Master*
+Data*.txt
 CC*.txt
 AC*.txt
 GC*.txt
 NC*.txt
 *.o
 *.out
+*.zip
