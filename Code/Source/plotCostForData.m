@@ -19,7 +19,17 @@ function plotCost = plotCostForData (data, drawMode ,peak, epsilon, option='b')
 		end
 	end
 	if ~exist('peak','var') || isempty(peak)
-		peak = mode(b);
+
+		%%%%% Added Later	
+		bb = zeros(size(data,2),1);
+		for i=1:size(b,1)
+			bb(b(i)) = bb(b(i)) + 1;
+		end
+		[maxb, peak] = max(bb(1:end-4) + bb(2:end-3) + bb(3:end-2) + bb(4:end-1) + bb(5:end));
+		peak = peak + 2;
+		%%%%%%%%%%%%%%
+		
+		%peak = mode(b);
 	end
 	
 	for i=1:size(data,1)
