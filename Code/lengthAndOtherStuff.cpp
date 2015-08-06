@@ -42,19 +42,16 @@ int main(){
 	cin>>rootDir;
 	path root(rootDir);
 	fstream destFile;
-	destFile.open("AllData.txt",ios::out);
+	destFile.open("LengthATGCData.txt",ios::out);
 	directory_iterator it(root),eod;
 	data x;
 	BOOST_FOREACH(const path& p, make_pair(it,eod)){
 		if(regex_match(p.filename().string(),regex("NC.*"))){
-			directory_iterator mIt(p);
-			BOOST_FOREACH(const path& q,make_pair(mIt,eod)){
-				if(is_regular_file(q) && regex_match(q.filename().string(),regex("NC.*"))){
-					mFunc(x,q.string());
-					destFile<<q.filename().string()<<" "<<x.length<<" "<<x.aContent<<" "<<x.tContent<<" "<<x.gContent<<" "<<x.cContent<<"\n";
+				if(is_regular_file(p)){
+					mFunc(x,p.string());
+					destFile<<p.filename().string()<<" "<<x.length<<" "<<x.aContent<<" "<<x.tContent<<" "<<x.gContent<<" "<<x.cContent<<"\n";
 				}
 			}
-		}
 	}
 	return 0;
 }
