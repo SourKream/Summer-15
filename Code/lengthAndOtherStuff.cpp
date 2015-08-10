@@ -45,11 +45,15 @@ int main(){
 	destFile.open("LengthATGCData.txt",ios::out);
 	directory_iterator it(root),eod;
 	data x;
+	int count=0;
 	BOOST_FOREACH(const path& p, make_pair(it,eod)){
 		if(regex_match(p.filename().string(),regex("NC.*"))){
 				if(is_regular_file(p)){
 					mFunc(x,p.string());
-					destFile<<p.filename().string()<<" "<<x.length<<" "<<x.aContent<<" "<<x.tContent<<" "<<x.gContent<<" "<<x.cContent<<"\n";
+					destFile<<x.length<<" "<<x.aContent<<" "<<x.tContent<<" "<<x.gContent<<" "<<x.cContent<<"\n";
+					count ++;
+					cout << "Genomes processed: " << count << "\r";
+					fflush(stdout);
 				}
 			}
 	}
