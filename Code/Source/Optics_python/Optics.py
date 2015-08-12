@@ -10,9 +10,9 @@ class optics:
 		self.epsilon = epsilon
 		self.minPts = minPts
 
-	def setData(self,data,dist,ind):
-		self.data = data
-		(m,n) = data.shape
+	def setData(self,shape_tuple,dist,ind):
+		#self.data = data
+		(m,n) = shape_tuple
 		self.distance = dist
 		self.ind = ind
 		self.listOfObjects = []
