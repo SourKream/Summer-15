@@ -10,3 +10,5 @@ NC*.txt
 *.zip
 octave-workspace
 clustering\ Papers/
+GeneSignatureN*.txt
+clusterInfo
