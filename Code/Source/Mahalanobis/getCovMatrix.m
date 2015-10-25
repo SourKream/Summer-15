@@ -5,3 +5,4 @@ function [Sigma,mu] = getCovMatrix(cluster_data)
 	mu = mean(cluster_data);
 	x_norm = bsxfun(@minus, cluster_data,mu);
 	Sigma = 1 / m .* (x_norm' * x_norm);
+	Sigma = pinv(Sigma)
