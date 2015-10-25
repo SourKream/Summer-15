@@ -14,7 +14,7 @@ function plotCost = plotCostForData (data, drawMode ,peak, epsilon, option='b')
 	[a,b] = max(data,'',2);
 	if ~exist('peak','var') || isempty(peak)
 
-		%%%%% Added Later	
+		%%%%% Added Later	(To define a small window of subwindowsizes with more genomes as peak instead of single subwindowsize)
 		bb = zeros(size(data,2),1);
 		for i=1:size(b,1)
 			bb(b(i)) = bb(b(i)) + 1;
